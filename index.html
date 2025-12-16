@@ -1,0 +1,78 @@
+"
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notes — Voice Input</title>
+  <meta name="description" content="Notes app with speech-to-text, dark/light mode, and localStorage." />
+</head>
+<link rel="stylesheet" href="style.css">
+
+<body>
+  <div id="app">
+    <header>
+      <div class="brand">
+        <div class="logo">N</div>
+        <div>
+          <h1 style="color: #7c3aed;">Notes — Voice Input</h1>
+          <p class="lead">Create quick notes using typing or speech. Your data stays in your browser.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="themeToggle" class="btn ghost" aria-pressed="false" title="Toggle dark/light">🌗 Theme</button>
+        <button id="newNoteBtn" class="btn primary">＋ New Note</button>
+      </div>
+    </header>
+
+    <main class="app" role="application">
+      <aside class="panel" aria-label="Sidebar">
+        <div class="controls">
+          <div style="flex:1">
+            <input id="searchInput" placeholder="Search notes..."
+              style="width:100%;padding:10px;border-radius:10px;border:1px solid rgba(15,23,36,0.06)" />
+          </div>
+          <button id="clearAll" class="btn" title="Delete all notes">🗑️</button>
+        </div>
+
+        <div class="notes-list" id="notesList" style="color:#ff7b7b;" role="list"></div>
+        <div id="sidebarEmpty" class="empty" style="display:none">No notes yet — click "New Note" to create one.</div>
+      </aside>
+
+      <section class="editor" aria-label="Editor">
+        <div class="toolbar">
+          <input id="titleInput" class="title-input" placeholder="Note title" />
+          <div style="flex:1"></div>
+          <button id="speakBtn" class="btn ghost" title="Start speech-to-text">🎤 Speak</button>
+          <button id="ttsBtn" class="btn ghost" title="Read note aloud">🔊 Read</button>
+          <select id="voiceSelect" class="btn ghost" style="max-width:180px"></select>
+          <select id="presetSelect" class="btn ghost" title="Voice Presets" style="max-width:160px">
+            <option value="none">Preset: None</option>
+            <option value="softwarm">Soft & Warm (Recommended)</option>
+          </select>
+          <input id="rateRange" type="range" min="0.5" max="2" step="0.1" value="1" title="Speech speed" />
+          <button id="saveBtn" class="btn primary">Save</button>
+          <button id="deleteBtn" class="btn" style="color: green;" title="Delete note">Delete</button>
+        </div>
+
+        <div class="content-area">
+          <textarea id="contentInput" style="color: #ff7b7b;"
+            placeholder="Write your notes here — or press Speak and talk." rows="12"></textarea>
+          <div class="bottom-row">
+            <div class="meta">Last saved: <span id="lastSaved">—</span></div>
+            <div class="actions">
+              <div class="pill" id="charCount" style="color: green;">0 chars</div>
+              <button id="exportBtn" style="color: green;" class="btn">Export</button>
+              <input id="importFile" type="file" accept="application/json" style="display:none" />
+              <button id="importBtn" class="btn" style="color: green;">Import</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js.js"></script>
+</body>
+
+</html>
